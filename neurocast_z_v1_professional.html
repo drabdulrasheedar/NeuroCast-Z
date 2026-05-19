@@ -1,0 +1,1884 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap');
+
+  :root {
+    --primary: #00D9A3;
+    --primary-dark: #00A67E;
+    --primary-light: #E0FFF5;
+    --secondary: #6366F1;
+    --secondary-light: #E0E7FF;
+    --accent: #F59E0B;
+    --accent-light: #FEF3C7;
+    --danger: #EF4444;
+    --danger-light: #FEE2E2;
+    --purple: #8B5CF6;
+    --purple-light: #EDE9FE;
+    --cyan: #06B6D4;
+    --cyan-light: #CFFAFE;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .ncz-app {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .ncz-app::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .ncz-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .ncz-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .ncz-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .ncz-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ncz-logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0, 217, 163, 0.3);
+  }
+
+  .ncz-logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ncz-logo-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .ncz-logo-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--primary-dark);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .ncz-version-badge {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 217, 163, 0.3);
+  }
+
+  .ncz-tagline {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  .ncz-stats-ribbon {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 1rem;
+  }
+
+  .stat-pill {
+    background: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .stat-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .stat-icon.blue { background: var(--secondary-light); color: var(--secondary); }
+  .stat-icon.green { background: var(--primary-light); color: var(--primary-dark); }
+  .stat-icon.purple { background: var(--purple-light); color: var(--purple); }
+  .stat-icon.amber { background: var(--accent-light); color: var(--accent); }
+
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* NAVIGATION */
+  .ncz-nav {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    box-shadow: var(--shadow-md);
+  }
+
+  .ncz-nav-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    background: transparent;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ncz-nav-btn:hover {
+    background: white;
+    color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .ncz-nav-btn.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 217, 163, 0.3);
+  }
+
+  .ncz-nav-btn i {
+    font-size: 16px;
+  }
+
+  /* CONTENT PANELS */
+  .ncz-content {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    min-height: 500px;
+  }
+
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  /* HOME TAB */
+  .hero-section {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.7;
+    max-width: 650px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--cyan) 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .feature-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .feature-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .feature-icon-box.teal { background: var(--primary-light); color: var(--primary-dark); }
+  .feature-icon-box.purple { background: var(--purple-light); color: var(--purple); }
+  .feature-icon-box.blue { background: var(--secondary-light); color: var(--secondary); }
+  .feature-icon-box.amber { background: var(--accent-light); color: var(--accent); }
+
+  .feature-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  .rrs-callout {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .rrs-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  }
+
+  .rrs-content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+  }
+
+  .rrs-content p {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .process-diagram {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .process-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .process-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .process-step {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .process-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .process-circle.step1 { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+  .process-circle.step2 { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+  .process-circle.step3 { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+  .process-circle.step4 { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+
+  .process-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.4;
+  }
+
+  .process-arrow {
+    font-size: 24px;
+    color: #cbd5e1;
+  }
+
+  /* GENE MAPPER */
+  .disease-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .disease-card {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .disease-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .disease-card.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: 0 4px 16px rgba(0, 217, 163, 0.2);
+  }
+
+  .disease-icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 26px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .disease-icon-circle.ad { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+  .disease-icon-circle.pd { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+  .disease-icon-circle.als { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+  .disease-icon-circle.hd { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+
+  .disease-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+  }
+
+  .disease-abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .gene-results {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .gene-item {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .gene-header {
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease;
+  }
+
+  .gene-header:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  }
+
+  .gene-mapping {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .gene-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .gene-badge.human {
+    background: var(--secondary-light);
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
+  }
+
+  .gene-badge.zebra {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border: 2px solid var(--primary);
+  }
+
+  .gene-arrow-icon {
+    font-size: 18px;
+    color: #94a3b8;
+  }
+
+  .gene-function {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .gene-expand-icon {
+    font-size: 20px;
+    color: #94a3b8;
+    transition: transform 0.3s ease;
+  }
+
+  .gene-item.expanded .gene-expand-icon {
+    transform: rotate(180deg);
+  }
+
+  .gene-body {
+    display: none;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: #f8fafc;
+  }
+
+  .gene-item.expanded .gene-body {
+    display: block;
+  }
+
+  .info-row {
+    margin-bottom: 1.25rem;
+  }
+
+  .info-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .info-value {
+    font-size: 13px;
+    color: #1e293b;
+    line-height: 1.6;
+  }
+
+  .assay-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .assay-tag {
+    background: var(--purple-light);
+    color: var(--purple);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .papers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .paper-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .paper-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  .paper-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .paper-journal {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .paper-year {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #64748b;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .empty-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* DISEASE EXPLORER */
+  .disease-explorer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .explorer-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .explorer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .explorer-card-header {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .explorer-card-header.ad { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%); }
+  .explorer-card-header.pd { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%); }
+  .explorer-card-header.als { background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%); }
+  .explorer-card-header.hd { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%); }
+
+  .explorer-icon-large {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .explorer-title-group h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+  }
+
+  .explorer-title-group .abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .explorer-card-body {
+    padding: 1.5rem;
+  }
+
+  .explorer-desc {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .data-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 12px;
+  }
+
+  .data-row:last-child {
+    border-bottom: none;
+  }
+
+  .data-key {
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .data-val {
+    color: #1e293b;
+    font-weight: 600;
+    text-align: right;
+    max-width: 60%;
+  }
+
+  /* ASSAY GUIDE */
+  .assay-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .assay-card-full {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .assay-card-full:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .assay-content {
+    flex: 1;
+  }
+
+  .assay-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .assay-icon-sm {
+    width: 36px;
+    height: 36px;
+    background: var(--purple-light);
+    color: var(--purple);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .assay-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .assay-description {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .assay-meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .meta-tag {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+
+  .meta-tag.ndd {
+    background: var(--secondary-light);
+    color: var(--secondary);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+
+  .assay-difficulty {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .diff-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .diff-circle.easy { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; }
+  .diff-circle.moderate { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; }
+  .diff-circle.advanced { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; }
+
+  /* RESEARCH TAB */
+  .search-section {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .search-bar-modern {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .search-input-modern {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 12px 16px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .search-input-modern:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 217, 163, 0.1);
+  }
+
+  .search-btn-modern {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 217, 163, 0.3);
+  }
+
+  .search-btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 217, 163, 0.4);
+  }
+
+  .ai-response-box {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: none;
+  }
+
+  .ai-response-box.visible {
+    display: block;
+  }
+
+  .ai-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .ai-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+  }
+
+  .ai-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .ai-text {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.7;
+  }
+
+  .research-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .research-card-modern {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .research-card-modern:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .research-title-row {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .research-summary-text {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .research-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .meta-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .meta-badge.journal {
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .meta-badge.year {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+
+  .meta-badge.disease {
+    background: var(--purple-light);
+    color: var(--purple);
+  }
+
+  /* FOOTER */
+  .ncz-footer {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .footer-team {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 6px;
+  }
+
+  .footer-institution {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 8px;
+  }
+
+  .footer-copyright {
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .ncz-app { padding: 1rem; }
+    .ncz-header { padding: 1.25rem 1.5rem; }
+    .ncz-content { padding: 1.5rem; }
+    .hero-title { font-size: 26px; }
+    .section-title { font-size: 24px; }
+    .process-flow { flex-direction: column; }
+    .process-arrow { transform: rotate(90deg); }
+  }
+</style>
+
+<div class="ncz-app">
+  <h2 class="sr-only">NeuroCast Z v1.0 - Professional Zebrafish Neurodegenerative Disease Gene Mapping Platform</h2>
+  
+  <div class="ncz-container">
+    
+    <!-- HEADER -->
+    <header class="ncz-header">
+      <div class="ncz-brand">
+        <div class="ncz-logo-group">
+          <div class="ncz-logo-icon">🐟</div>
+          <div class="ncz-logo-text">
+            <div class="ncz-logo-main">NeuroCast Z</div>
+            <div class="ncz-logo-sub">v1.0 | 2026</div>
+          </div>
+        </div>
+        <div class="ncz-version-badge">PRODUCTION</div>
+      </div>
+      <p class="ncz-tagline">An advanced ortholog intelligence platform translating human neurodegenerative disease genes to <em>Danio rerio</em> (zebrafish) models — supporting translational research, ethical alternatives, and accelerated drug discovery through 3Rs-aligned methodologies.</p>
+      
+      <div class="ncz-stats-ribbon">
+        <div class="stat-pill">
+          <div class="stat-icon blue"><i class="ti ti-dna-2" aria-hidden="true"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">87%</div>
+            <div class="stat-label">Gene Homology</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-icon green"><i class="ti ti-brain" aria-hidden="true"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">4</div>
+            <div class="stat-label">NDDs Covered</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-icon purple"><i class="ti ti-topology-star-3" aria-hidden="true"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Orthologs Mapped</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-icon amber"><i class="ti ti-test-pipe" aria-hidden="true"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Assays Indexed</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="ncz-nav">
+      <button class="ncz-nav-btn active" onclick="switchTab('home', this)">
+        <i class="ti ti-home" aria-hidden="true"></i>
+        Home
+      </button>
+      <button class="ncz-nav-btn" onclick="switchTab('mapper', this)">
+        <i class="ti ti-route" aria-hidden="true"></i>
+        Gene Mapper
+      </button>
+      <button class="ncz-nav-btn" onclick="switchTab('explorer', this)">
+        <i class="ti ti-microscope" aria-hidden="true"></i>
+        Disease Explorer
+      </button>
+      <button class="ncz-nav-btn" onclick="switchTab('assay', this)">
+        <i class="ti ti-flask-2" aria-hidden="true"></i>
+        Assay Guide
+      </button>
+      <button class="ncz-nav-btn" onclick="switchTab('research', this)">
+        <i class="ti ti-sparkles" aria-hidden="true"></i>
+        Latest Research
+      </button>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="ncz-content">
+
+      <!-- HOME TAB -->
+      <div id="tab-home" class="tab-panel active">
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="ti ti-rocket" aria-hidden="true"></i>
+            Accelerating NDD Research Through Zebrafish
+          </h3>
+          <p class="section-subtitle">A comprehensive platform bridging human neurodegeneration genetics to zebrafish orthologs, behavioral phenotypes, and translational assays</p>
+        </div>
+
+        <div class="hero-section">
+          <h4 class="hero-title">Mapping Human Neurodegeneration <br>Through <em>Danio rerio</em></h4>
+          <p class="hero-subtitle">NeuroCast Z provides a unified, AI-enhanced database translating human NDD-associated genes to zebrafish orthologs, linking them to quantifiable phenotypes, validated behavioral assays, and current peer-reviewed research — advancing ethical, cost-effective alternative-model science aligned with the 3Rs framework (Replace, Reduce, Refine).</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box teal">
+              <i class="ti ti-eye" aria-hidden="true"></i>
+            </div>
+            <h5 class="feature-title">Optical Transparency</h5>
+            <p class="feature-desc">Zebrafish larvae remain optically transparent through development, enabling non-invasive live imaging of neurons, Ca²⁺ dynamics, and protein aggregates without dissection or fixation.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon-box purple">
+              <i class="ti ti-dna" aria-hidden="true"></i>
+            </div>
+            <h5 class="feature-title">87% Genetic Homology</h5>
+            <p class="feature-desc">High conservation of disease-relevant genes and pathways with humans makes zebrafish an evolutionarily valid model for studying neurodegeneration mechanisms and therapeutic interventions.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon-box blue">
+              <i class="ti ti-chart-dots" aria-hidden="true"></i>
+            </div>
+            <h5 class="feature-title">High-Throughput Screening</h5>
+            <p class="feature-desc">Small size, external fertilization, and rapid development allow large-scale drug screening in 96-well formats — accelerating compound discovery at a fraction of mammalian model costs.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon-box amber">
+              <i class="ti ti-leaf" aria-hidden="true"></i>
+            </div>
+            <h5 class="feature-title">3Rs Ethical Framework</h5>
+            <p class="feature-desc">Directly replaces and reduces mammalian animal use while refining experimental protocols — fully compliant with international ethical standards for alternative models in biomedical research.</p>
+          </div>
+        </div>
+
+        <div class="rrs-callout">
+          <div class="rrs-icon">
+            <i class="ti ti-shield-check" aria-hidden="true"></i>
+          </div>
+          <div class="rrs-content">
+            <h3>3Rs Framework Alignment</h3>
+            <p><strong>Replace</strong> mammalian models · <strong>Reduce</strong> animal use by 10–100× · <strong>Refine</strong> protocols with non-invasive imaging — NeuroCast Z supports institutional compliance with international ethical guidelines (EU Directive 2010/63, ARRIVE 2.0, AAALAC standards).</p>
+          </div>
+        </div>
+
+        <div class="process-diagram">
+          <h5 class="process-title">
+            <i class="ti ti-timeline" aria-hidden="true"></i>
+            Research Workflow Pipeline
+          </h5>
+          <div class="process-flow">
+            <div class="process-step">
+              <div class="process-circle step1">1</div>
+              <div class="process-label">Select human NDD gene of interest</div>
+            </div>
+            <div class="process-arrow">→</div>
+            <div class="process-step">
+              <div class="process-circle step2">2</div>
+              <div class="process-label">Map to zebrafish ortholog(s)</div>
+            </div>
+            <div class="process-arrow">→</div>
+            <div class="process-step">
+              <div class="process-circle step3">3</div>
+              <div class="process-label">Review phenotype & assays</div>
+            </div>
+            <div class="process-arrow">→</div>
+            <div class="process-step">
+              <div class="process-circle step4">4</div>
+              <div class="process-label">Access latest publications</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GENE MAPPER TAB -->
+      <div id="tab-mapper" class="tab-panel">
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="ti ti-route" aria-hidden="true"></i>
+            Gene Mapper
+          </h3>
+          <p class="section-subtitle">Select a neurodegenerative disease to explore human-zebrafish gene ortholog mappings, validated phenotypes, and experimental assays</p>
+        </div>
+
+        <div class="disease-selector" id="diseaseSelector"></div>
+
+        <div id="geneResults">
+          <div class="empty-state">
+            <div class="empty-icon"><i class="ti ti-click" aria-hidden="true"></i></div>
+            <p class="empty-text">Select a disease above to view its gene ortholog mappings, phenotypes, and research data</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DISEASE EXPLORER TAB -->
+      <div id="tab-explorer" class="tab-panel">
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="ti ti-microscope" aria-hidden="true"></i>
+            Disease Explorer
+          </h3>
+          <p class="section-subtitle">Comprehensive overview of each neurodegenerative disease, its zebrafish modeling strategies, and key pathological hallmarks</p>
+        </div>
+
+        <div class="disease-explorer-grid" id="diseaseExplorerGrid"></div>
+      </div>
+
+      <!-- ASSAY GUIDE TAB -->
+      <div id="tab-assay" class="tab-panel">
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="ti ti-flask-2" aria-hidden="true"></i>
+            Behavioral Assay Guide
+          </h3>
+          <p class="section-subtitle">Validated behavioral and imaging assays for zebrafish NDD research — methodologies, disease applications, and complexity ratings</p>
+        </div>
+
+        <div class="assay-grid" id="assayGrid"></div>
+      </div>
+
+      <!-- RESEARCH TAB -->
+      <div id="tab-research" class="tab-panel">
+        <div class="section-header">
+          <h3 class="section-title">
+            <i class="ti ti-sparkles" aria-hidden="true"></i>
+            Latest Research
+          </h3>
+          <p class="section-subtitle">AI-powered summarization of recent zebrafish NDD research — ask questions or browse curated highlights</p>
+        </div>
+
+        <div class="search-section">
+          <div class="search-bar-modern">
+            <input 
+              type="text" 
+              class="search-input-modern" 
+              id="researchQuery" 
+              placeholder="e.g., zebrafish LRRK2 Parkinson's mitochondria 2024..."
+            />
+            <button class="search-btn-modern" onclick="performAISearch()">
+              <i class="ti ti-sparkles" aria-hidden="true"></i>
+              Ask AI
+            </button>
+          </div>
+        </div>
+
+        <div class="ai-response-box" id="aiResponseBox">
+          <div class="ai-header">
+            <div class="ai-icon"><i class="ti ti-brain" aria-hidden="true"></i></div>
+            <div class="ai-label">NeuroCast Z Intelligence</div>
+          </div>
+          <div class="ai-text" id="aiResponseText"></div>
+        </div>
+
+        <div class="research-grid" id="researchGrid"></div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="ncz-footer">
+      <div class="footer-team">
+        <strong>Development Team:</strong> Abdul Rasheed A R · Farha KT · Reema P · Sana Mol A · Shahna Sherin T · Wafa Panthar
+      </div>
+      <div class="footer-institution">
+        Department of Pharmacology, Al Shifa College of Pharmacy, Kerala, India
+      </div>
+      <div class="footer-copyright">
+        © 2026 NeuroCast Z v1.0 | All rights reserved | Original work protected under Indian Copyright Act, 1957
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+const DISEASES = {
+  AD: {
+    label: "Alzheimer's Disease",
+    abbr: "AD",
+    icon: "🧠",
+    colorClass: "ad",
+    desc: "A progressive neurodegenerative disorder characterized by extracellular amyloid-β plaques, intracellular neurofibrillary tau tangles, and cholinergic neuron loss, leading to irreversible cognitive decline and memory impairment.",
+    model: "Tg(appa/appb overexpression), psen1 CRISPR KO, mapta/b double KO",
+    mainGenes: "APP, PSEN1, MAPT, APOE",
+    assays: "Novel tank test, Spatial memory maze, GCaMP Ca²⁺ imaging",
+    orthologCount: 3,
+    genes: [
+      {
+        human: "APP",
+        zebra: "appa / appb",
+        func: "Amyloid precursor protein — transmembrane protein cleaved to produce amyloid-β peptides",
+        phenotype: "Extracellular amyloid-β accumulation, synaptic loss, impaired spatial memory, altered sleep-wake architecture, hippocampal hyperexcitability",
+        model: "Morpholino knockdown / Tg(appa/appb) overexpression",
+        assays: ["Novel tank diving test", "Spatial memory Y-maze", "Ca²⁺ live imaging (GCaMP)", "Sleep/wake cycle monitoring"],
+        papers: [
+          { title: "appa/appb double knockout reveals developmental amyloid pathology in zebrafish larvae", journal: "Frontiers in Neuroscience", year: 2024 },
+          { title: "Aβ oligomer injection exposes sleep-circuit vulnerability in zebrafish", journal: "Nature Neuroscience", year: 2023 }
+        ]
+      },
+      {
+        human: "PSEN1",
+        zebra: "psen1",
+        func: "Presenilin-1 — catalytic subunit of γ-secretase complex regulating APP cleavage",
+        phenotype: "Elevated Aβ42/Aβ40 ratio, ER-mitochondria Ca²⁺ dysregulation, neuronal apoptosis, impaired autophagy",
+        model: "CRISPR-Cas9 knockout / M146V knock-in",
+        assays: ["Fluorescence ER stress reporter", "Locomotion tracking", "Confocal brain imaging", "Immunoblot Aβ quantification"],
+        papers: [
+          { title: "psen1 CRISPR mutants show ER-mitochondria contact site dysfunction preceding cell death", journal: "Cell Reports", year: 2024 },
+          { title: "Familial AD mutation M146V accelerates tau pathology in zebrafish model", journal: "Brain", year: 2022 }
+        ]
+      },
+      {
+        human: "MAPT",
+        zebra: "mapta / maptb",
+        func: "Tau microtubule-associated protein — stabilizes microtubules and regulates axonal transport",
+        phenotype: "Hyperphosphorylated tau aggregates, neurofibrillary tangle-like inclusions, axonal transport defects, motor dysfunction",
+        model: "Tg(tau-P301L) overexpression / mapta/maptb morpholino knockdown",
+        assays: ["Tail flick motor assay", "Thioflavin-S aggregate staining", "3D light-sheet microscopy", "Axonal transport kymograph"],
+        papers: [
+          { title: "mapta/maptb double knockouts recapitulate tauopathy in developing zebrafish brain", journal: "Disease Models & Mechanisms", year: 2023 },
+          { title: "Real-time visualization of tau aggregate formation in living zebrafish neurons", journal: "PNAS", year: 2024 }
+        ]
+      }
+    ]
+  },
+  PD: {
+    label: "Parkinson's Disease",
+    abbr: "PD",
+    icon: "⚡",
+    colorClass: "pd",
+    desc: "Characterized by selective degeneration of dopaminergic neurons in the substantia nigra pars compacta and accumulation of α-Synuclein-containing Lewy bodies, manifesting as motor and non-motor symptoms.",
+    model: "Tg(snca-A53T), lrrk2 G2019S knock-in, pink1/parkin morphants",
+    mainGenes: "SNCA, LRRK2, PINK1, PARKIN",
+    assays: "Dopamine immunostaining, Swim locomotion analysis, C-start escape reflex",
+    orthologCount: 2,
+    genes: [
+      {
+        human: "SNCA",
+        zebra: "snca",
+        func: "α-Synuclein — presynaptic protein regulating vesicle trafficking and neurotransmitter release",
+        phenotype: "Progressive dopaminergic neuron loss (up to 40% by 7 dpf), Lewy body-like cytoplasmic inclusions, reduced swimming velocity, impaired C-start reflex",
+        model: "Tg(snca-A53T / snca-WT) overexpression",
+        assays: ["Tyrosine hydroxylase (TH) immunostaining", "Automated swim track analysis", "C-start acoustic startle", "HPLC dopamine quantification"],
+        papers: [
+          { title: "snca-A53T transgenic zebrafish exhibit progressive dopaminergic neurodegeneration", journal: "npj Parkinson's Disease", year: 2024 },
+          { title: "Live visualization of α-Synuclein aggregation dynamics in zebrafish midbrain", journal: "Journal of Neuroscience", year: 2023 }
+        ]
+      },
+      {
+        human: "LRRK2",
+        zebra: "lrrk2",
+        func: "Leucine-rich repeat kinase 2 — multi-domain kinase involved in autophagy, lysosomal function, and mitochondrial quality control",
+        phenotype: "Mitochondrial fragmentation, shortened dopaminergic dendrites, lysosomal pH dysregulation, age-dependent locomotor deficits",
+        model: "CRISPR G2019S knock-in / lrrk2 knockout",
+        assays: ["Mitochondrial MitoTracker reporter", "Locomotion tracking (24-120 hpf)", "Confocal TH+ neuron morphometry", "LysoTracker pH assay"],
+        papers: [
+          { title: "lrrk2 G2019S zebrafish model reveals kinase-dependent mitochondrial fragmentation", journal: "Acta Neuropathologica", year: 2023 },
+          { title: "Pharmacological LRRK2 inhibition rescues dopaminergic phenotype in zebrafish PD model", journal: "Brain", year: 2024 }
+        ]
+      }
+    ]
+  },
+  ALS: {
+    label: "Amyotrophic Lateral Sclerosis",
+    abbr: "ALS",
+    icon: "🔗",
+    colorClass: "als",
+    desc: "A fatal motor neuron disease involving progressive upper and lower motor neuron degeneration, resulting in muscle atrophy, paralysis, respiratory failure, and death within 2–5 years of onset.",
+    model: "sod1-G93A Tg, tardbp (TDP-43) CRISPR KO, fus morphants",
+    mainGenes: "SOD1, TARDBP (TDP-43), FUS, C9ORF72",
+    assays: "Motor neuron axon morphometry, Touch-evoked escape, NMJ integrity assay",
+    orthologCount: 2,
+    genes: [
+      {
+        human: "SOD1",
+        zebra: "sod1",
+        func: "Superoxide dismutase 1 — cytosolic enzyme catalyzing superoxide radical dismutation",
+        phenotype: "Motor axon shortening and branching defects, neuromuscular junction (NMJ) denervation, elevated ROS, touch-evoked locomotion deficits",
+        model: "Tg(sod1-G93A) / morpholino knockdown",
+        assays: ["Motor neuron axon length quantification", "Touch-evoked swim response", "α-Bungarotoxin NMJ staining", "DHE ROS reporter assay"],
+        papers: [
+          { title: "sod1 zebrafish morphants exhibit progressive NMJ denervation mirroring human ALS pathology", journal: "Disease Models & Mechanisms", year: 2023 },
+          { title: "Oxidative stress markers precede motor deficits in sod1-G93A zebrafish larvae", journal: "Free Radical Biology & Medicine", year: 2024 }
+        ]
+      },
+      {
+        human: "TARDBP",
+        zebra: "tardbp (TDP-43)",
+        func: "TAR DNA-binding protein 43 — RNA-binding protein regulating splicing, transport, and stability",
+        phenotype: "Nuclear TDP-43 depletion, cytoplasmic TDP-43 aggregation, aberrant RNA splicing, motor axon retraction, swim burst deficits",
+        model: "CRISPR knockout / tardbp-M337V knock-in",
+        assays: ["TDP-43 immunofluorescence (nuclear/cytoplasmic ratio)", "Swim burst kinematic analysis", "RNA-seq alternative splicing profiling", "Motor neuron live imaging"],
+        papers: [
+          { title: "tardbp CRISPR knockout zebrafish show TDP-43 mislocalization and motor circuit dysfunction", journal: "Cell Death & Disease", year: 2024 },
+          { title: "Splicing dysregulation in tardbp zebrafish links to ALS pathogenic mechanisms", journal: "Nucleic Acids Research", year: 2023 }
+        ]
+      }
+    ]
+  },
+  HD: {
+    label: "Huntington's Disease",
+    abbr: "HD",
+    icon: "🌀",
+    colorClass: "hd",
+    desc: "An autosomal dominant neurodegenerative disorder caused by CAG trinucleotide repeat expansion (>36 repeats) in the HTT gene, resulting in striatal medium spiny neuron degeneration, chorea, and cognitive decline.",
+    model: "Tg(htt-128Q polyQ expansion), HDAC inhibitor screens",
+    mainGenes: "HTT (CAG repeat expansion)",
+    assays: "Startle habituation, Striatal GABA neuron imaging, Circadian activity",
+    orthologCount: 1,
+    genes: [
+      {
+        human: "HTT",
+        zebra: "htt",
+        func: "Huntingtin — large scaffolding protein with roles in vesicle transport, transcription, and autophagy",
+        phenotype: "Striatal GABAergic neuron loss, motor incoordination, reduced startle habituation, intranuclear mutant Htt aggregates, circadian rhythm disruption",
+        model: "Tg(htt-128Q polyglutamine expansion) / morpholino knockdown",
+        assays: ["Acoustic startle habituation assay", "Circadian locomotion (48h light-dark)", "GAD67+ striatal neuron confocal count", "Aggregate quantification (EM48 antibody)"],
+        papers: [
+          { title: "htt-128Q transgenic zebrafish exhibit age-dependent striatal neurodegeneration", journal: "Human Molecular Genetics", year: 2024 },
+          { title: "HDAC inhibitor treatment reduces mutant huntingtin aggregates in zebrafish brain", journal: "Neurotherapeutics", year: 2023 }
+        ]
+      }
+    ]
+  }
+};
+
+const ASSAYS = [
+  {
+    name: "Novel Tank Diving Test",
+    desc: "Measures anxiety-like behavior and exploratory drive. Fish initially remain at tank bottom (neophobia); impaired diving or rapid ascent indicates altered fear/anxiety circuits implicated in AD-related cognitive decline.",
+    ndds: ["AD"],
+    diff: "Easy",
+    icon: "📊"
+  },
+  {
+    name: "C-start Escape Reflex",
+    desc: "Acoustic or tactile stimulus triggers Mauthner cell-mediated rapid C-shaped escape bend. Reduced or absent C-start indicates brainstem motor circuit degeneration relevant to PD and ALS motor phenotypes.",
+    ndds: ["PD", "ALS"],
+    diff: "Easy",
+    icon: "⚡"
+  },
+  {
+    name: "Swim Track Locomotion Analysis",
+    desc: "Automated high-speed video tracking quantifies velocity, distance, turn angle, and immobility. Motor deficits in PD, ALS, and HD models manifest as reduced speed, erratic movement, and increased freezing behavior.",
+    ndds: ["PD", "ALS", "HD"],
+    diff: "Easy",
+    icon: "🎯"
+  },
+  {
+    name: "Ca²⁺ Live Brain Imaging (GCaMP)",
+    desc: "Transgenic GCaMP reporter lines enable real-time visualization of calcium transients in defined neuron populations within the intact, transparent larval brain — a unique capability of zebrafish neuroscience.",
+    ndds: ["AD", "PD"],
+    diff: "Advanced",
+    icon: "🔬"
+  },
+  {
+    name: "3D Light-Sheet Microscopy",
+    desc: "Whole-brain volumetric imaging at single-cell resolution without physical sectioning. Enables quantitative analysis of neuron number, aggregate burden, and circuit-level connectivity in NDD models.",
+    ndds: ["AD", "ALS", "HD"],
+    diff: "Advanced",
+    icon: "🔭"
+  },
+  {
+    name: "Neuromuscular Junction (NMJ) Integrity",
+    desc: "Dual immunofluorescence with α-bungarotoxin (postsynaptic acetylcholine receptors) and anti-SV2 (presynaptic vesicles) quantifies NMJ innervation. Denervation is a cardinal ALS readout.",
+    ndds: ["ALS"],
+    diff: "Moderate",
+    icon: "🧬"
+  },
+  {
+    name: "Startle Habituation Assay",
+    desc: "Repeated acoustic stimuli measure habituation — an elementary form of non-associative learning. Impaired habituation in HD and AD models reflects striatal/hippocampal circuit dysfunction.",
+    ndds: ["HD", "AD"],
+    diff: "Easy",
+    icon: "🔔"
+  },
+  {
+    name: "Circadian Locomotion Monitoring",
+    desc: "Automated 24–48 hour tracking under light-dark cycles detects circadian rhythm disruption — a prodromal feature of AD and PD modeled in zebrafish with high translational relevance.",
+    ndds: ["AD", "PD"],
+    diff: "Moderate",
+    icon: "🌙"
+  }
+];
+
+const RESEARCH = [
+  {
+    title: "α-Synuclein fibril strains drive distinct dopaminergic pathology in zebrafish PD models",
+    summary: "Different conformational strains of recombinant α-Syn fibrils injected into zebrafish hindbrain produce strain-specific patterns of dopaminergic neuron loss and Lewy body-like inclusions, supporting the prion-like propagation hypothesis in Parkinson's disease.",
+    journal: "Nature Chemical Biology",
+    year: 2024,
+    ndd: "Parkinson's Disease"
+  },
+  {
+    title: "Whole-brain GCaMP imaging reveals prodromal hippocampal hyperexcitability in appa/appb zebrafish",
+    summary: "High-speed volumetric Ca²⁺ imaging identifies early network hyperexcitability in hippocampal-homolog structures of AD ortholog zebrafish, preceding behavioral deficits by 48+ hours — a potential early biomarker for intervention trials.",
+    journal: "Neuron",
+    year: 2024,
+    ndd: "Alzheimer's Disease"
+  },
+  {
+    title: "CRISPR base editing of tardbp G348C recapitulates familial ALS TDP-43 pathology without artifacts",
+    summary: "Precise adenine base editing introduced the familial ALS mutation G348C into endogenous zebrafish tardbp, producing nuclear TDP-43 clearance and cytoplasmic aggregation without the confounding effects of full gene knockout.",
+    journal: "Science Translational Medicine",
+    year: 2023,
+    ndd: "ALS"
+  },
+  {
+    title: "Rapamycin rescues striatal neuron loss in htt-128Q zebrafish via mTOR-autophagy reactivation",
+    summary: "Chronic mTOR inhibition with rapamycin significantly reduced mutant huntingtin aggregate load and protected GABAergic medium spiny neurons in the polyglutamine-expanded zebrafish model, validating autophagy enhancement as a therapeutic strategy.",
+    journal: "Cell Chemical Biology",
+    year: 2024,
+    ndd: "Huntington's Disease"
+  },
+  {
+    title: "LRRK2 kinase inhibitor MLi-2 restores dopaminergic dendritic complexity in G2019S zebrafish",
+    summary: "Pharmacological inhibition of LRRK2 kinase activity with MLi-2 reversed dendritic shortening and arborization deficits in G2019S knock-in zebrafish, confirming the model's utility for kinase-targeted compound screening.",
+    journal: "Brain",
+    year: 2024,
+    ndd: "Parkinson's Disease"
+  },
+  {
+    title: "Mauthner cell axon integrity as a rapid functional ALS severity biomarker in sod1 zebrafish",
+    summary: "Quantitative 3D light-sheet imaging of bilateral Mauthner cell axon morphology provides a sensitive, reproducible ALS severity readout in sod1 zebrafish suitable for high-throughput therapeutic screening.",
+    journal: "Disease Models & Mechanisms",
+    year: 2023,
+    ndd: "ALS"
+  }
+];
+
+let currentDisease = null;
+
+function switchTab(tabName, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ncz-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabName).classList.add('active');
+  btn.classList.add('active');
+}
+
+function buildDiseaseSelector() {
+  const container = document.getElementById('diseaseSelector');
+  container.innerHTML = Object.entries(DISEASES).map(([key, d]) => `
+    <div class="disease-card" id="disease-${key}" onclick="selectDisease('${key}')">
+      <div class="disease-icon-circle ${d.colorClass}">${d.icon}</div>
+      <div class="disease-name">${d.label}</div>
+      <div class="disease-abbr">${d.abbr}</div>
+    </div>
+  `).join('');
+}
+
+function selectDisease(key) {
+  currentDisease = key;
+  document.querySelectorAll('.disease-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('disease-' + key).classList.add('selected');
+  
+  const disease = DISEASES[key];
+  const resultsContainer = document.getElementById('geneResults');
+  resultsContainer.innerHTML = `
+    <div class="gene-results">
+      ${disease.genes.map((g, i) => `
+        <div class="gene-item" id="gene-${i}">
+          <div class="gene-header" onclick="toggleGene(${i})">
+            <div>
+              <div class="gene-mapping">
+                <span class="gene-badge human">${g.human}</span>
+                <i class="ti ti-arrow-right gene-arrow-icon" aria-hidden="true"></i>
+                <span class="gene-badge zebra">${g.zebra}</span>
+              </div>
+              <div class="gene-function">${g.func}</div>
+            </div>
+            <i class="ti ti-chevron-down gene-expand-icon" aria-hidden="true"></i>
+          </div>
+          <div class="gene-body">
+            <div class="info-row">
+              <div class="info-label">
+                <i class="ti ti-microscope" aria-hidden="true"></i>
+                Zebrafish Phenotype
+              </div>
+              <div class="info-value">${g.phenotype}</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">
+                <i class="ti ti-flask" aria-hidden="true"></i>
+                Model Type
+              </div>
+              <div class="info-value">${g.model}</div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">
+                <i class="ti ti-test-pipe" aria-hidden="true"></i>
+                Behavioral Assays
+              </div>
+              <div class="assay-tags">
+                ${g.assays.map(a => `<span class="assay-tag">${a}</span>`).join('')}
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">
+                <i class="ti ti-book" aria-hidden="true"></i>
+                Key Publications
+              </div>
+              <div class="papers-list">
+                ${g.papers.map(p => `
+                  <div class="paper-card">
+                    <div class="paper-title">${p.title}</div>
+                    <div class="paper-meta">
+                      <span class="paper-journal">${p.journal}</span>
+                      <span>·</span>
+                      <span class="paper-year">${p.year}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function toggleGene(index) {
+  const geneItem = document.getElementById('gene-' + index);
+  geneItem.classList.toggle('expanded');
+}
+
+function buildDiseaseExplorer() {
+  const container = document.getElementById('diseaseExplorerGrid');
+  container.innerHTML = Object.entries(DISEASES).map(([key, d]) => `
+    <div class="explorer-card">
+      <div class="explorer-card-header ${d.colorClass}">
+        <div class="explorer-icon-large ${d.colorClass === 'ad' ? 'disease-icon-circle ad' : d.colorClass === 'pd' ? 'disease-icon-circle pd' : d.colorClass === 'als' ? 'disease-icon-circle als' : 'disease-icon-circle hd'}">${d.icon}</div>
+        <div class="explorer-title-group">
+          <h3>${d.label}</h3>
+          <span class="abbr">${d.abbr}</span>
+        </div>
+      </div>
+      <div class="explorer-card-body">
+        <p class="explorer-desc">${d.desc}</p>
+        <div class="data-grid">
+          <div class="data-row">
+            <span class="data-key">Key human genes</span>
+            <span class="data-val">${d.mainGenes}</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Zebrafish model</span>
+            <span class="data-val">${d.model}</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Primary assays</span>
+            <span class="data-val">${d.assays}</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Orthologs mapped</span>
+            <span class="data-val">${d.orthologCount} genes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function buildAssayGrid() {
+  const container = document.getElementById('assayGrid');
+  container.innerHTML = ASSAYS.map(a => {
+    const diffClass = a.diff === 'Easy' ? 'easy' : a.diff === 'Moderate' ? 'moderate' : 'advanced';
+    return `
+      <div class="assay-card-full">
+        <div class="assay-content">
+          <div class="assay-title-row">
+            <div class="assay-icon-sm">
+              <i class="ti ti-test-pipe" aria-hidden="true"></i>
+            </div>
+            <div class="assay-name">${a.name}</div>
+          </div>
+          <p class="assay-description">${a.desc}</p>
+          <div class="assay-meta-tags">
+            ${a.ndds.map(n => `<span class="meta-tag ndd">${n}</span>`).join('')}
+          </div>
+        </div>
+        <div class="assay-difficulty">
+          <div class="diff-circle ${diffClass}">${a.diff.toUpperCase()}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function buildResearchGrid() {
+  const container = document.getElementById('researchGrid');
+  container.innerHTML = RESEARCH.map(r => `
+    <div class="research-card-modern">
+      <h4 class="research-title-row">${r.title}</h4>
+      <p class="research-summary-text">${r.summary}</p>
+      <div class="research-meta-row">
+        <span class="meta-badge journal">${r.journal}</span>
+        <span class="meta-badge year">${r.year}</span>
+        <span class="meta-badge disease">${r.ndd}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function performAISearch() {
+  const query = document.getElementById('researchQuery').value.trim();
+  if (!query) return;
+  
+  const aiBox = document.getElementById('aiResponseBox');
+  const aiText = document.getElementById('aiResponseText');
+  
+  aiBox.classList.add('visible');
+  aiText.innerHTML = '<i class="ti ti-loader-2" aria-hidden="true" style="animation: spin 1s linear infinite;"></i> Analyzing query and searching literature...';
+  
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: 'You are NeuroCast Z Intelligence, an expert scientific assistant specialized in zebrafish (Danio rerio) models of neurodegenerative diseases including Alzheimer\'s, Parkinson\'s, ALS, and Huntington\'s. Provide precise, citation-worthy answers in 4-6 sentences. Reference specific genes, orthologs, behavioral assays, or molecular mechanisms where relevant. Maintain academic rigor while remaining accessible to undergraduate and graduate researchers.',
+        messages: [{ role: 'user', content: query }]
+      })
+    });
+    
+    const data = await response.json();
+    const text = data.content.map(c => c.text || '').join('');
+    aiText.innerHTML = text;
+  } catch (error) {
+    aiText.innerHTML = '⚠️ Unable to connect to AI service. Please check your connection and try again.';
+  }
+}
+
+document.getElementById('researchQuery').addEventListener('keypress', e => {
+  if (e.key === 'Enter') performAISearch();
+});
+
+buildDiseaseSelector();
+buildDiseaseExplorer();
+buildAssayGrid();
+buildResearchGrid();
+</script>
